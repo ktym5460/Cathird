@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="stylesheet.css?date=2024-01-21">
+    <link rel="stylesheet" href="mediaScreen.css?date=2024-01-21">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+        });
+    </script>
+
+    <title>Cathird</title>
+    <meta name="description" content="Cathirdは3Dプリンタで印刷する回路基板をオンライン上で設計、制作することができる無料のCADソフトです。">
+
+    <link rel="icon" href="favicon.ico" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+
+    <script>
+        $(function () {
+            $("#head").load("head.html");
+        });
+    </script>
+
+
+
+
+
+</head>
+
+<body>
+    <header id="header"> </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>Cathirdの使い方</h1>
+            <p class="updateDate">更新日：2023-12-26</p>
+
+            <h2><span>00</span>Cathirdでできること</h2>
+            <img src="PicSource/UserGuide/1.jpg" alt="完成品の画像" />
+            <p>Cathird（キャサード）は3Dプリンターで印刷し使用する回路基板を設計できるWebアプリケーションです。
+            <p>Cathirdでは、
+                <br>　01. 基板外形の設計
+                <br>　02. 基板の押し出し
+                <br>　03. 回路の設計
+                <br>の3つの手順によって回路基板を設計します。
+            <p>下部では、それぞれの手順の操作方法、コツを紹介します。
+            </p>
+
+            <h2><span>01</span>基板外形の設計</h2>
+
+            <h3>基板外形の画像の準備</h3>
+            <p>Cathirdでは好きな形を回路基板として設計することができます。
+            <p>しかし、3Dプリンタで印刷して使用する上で、複数の分かれた形からなるものや細い部分が多いものは印刷して使用することができません。
+            <p>次の図のようなことに気をつけて回路基板の形を決めてください。
+            </p>
+            <img src="PicSource/UserGuide/2.jpg" alt="回路外形画像の注意" />
+            <p>オリジナルのイラストを描き、画像として読み込んでもよいですし、フリーの画像サイトから画像を読み込んでもよいでしょう。
+            <p>画像サイトから画像を利用する場合は、フリーアイコンサイト<a href="https://icooon-mono.com/">「ICOON MONO」</a>の画像を利用してみることをおすすめします。
+            </p>
+
+            <h3>基板外形の画像の挿入</h3>
+            <p>画像を選ぶことができたら、Cathird上に画像を読み込んでいきます。
+            <p>1. 外形 のツールエリア（画面右側）＞ 画像 ＞ 画像 を選び、準備した画像を読み込みます。
+            </p>
+            <img src="PicSource/UserGuide/3.gif" alt="回路外画像を読み込む動画" />
+            <p>読み込んだ画像を変更するときは、再度同じ操作を行い、別の画像を選択してください。
+            <p>1. 外形 のツールエリア ＞ 画像 の右側にある <i class="fa-solid fa-eye"></i> マークを押すと画像の表示/非表示を切り替えることができます。
+
+            <h3>基板外形を描く</h3>
+            <p>読み込んだ画像の基板外形をなぞり、回路基板の外形を作っていきます。
+            <p>1. 外形 のツールエリア＞ ブラシ ＞ 直線 または、1. 外形 のツールエリア＞ ブラシ ＞ 曲線を選び、外形をなぞります。
+            </p>
+            <img src="PicSource/UserGuide/4.gif" alt="回路外形を設計する動画" />
+            <p>ブラシツールを選んだ状態で、左クリックを押すことで線を描くことができます。
+            <p>描画中に右クリックを押すことで移動モードに切り替えることができます。
+            <p>移動モードでは線の点をドラッグすることで線の点の位置を再調整することができます。また、曲線内の青い点をドラッグすると曲線の曲がり具合を変えることができます。
+            </p>
+            <img src="PicSource/UserGuide/5.gif" alt="面が塗りつぶされた回路外形" />
+            <p>外形をすべて描き切り、最初の点と最後の点が繋がると面が塗りつぶされます。
+
+
+            <h3>基板の大きさを変える</h3>
+            <p>使用目的や設計に応じて回路基板の大きさを変えることができます。
+            </p>
+            <img src="PicSource/UserGuide/6.gif" alt="外形の大きさを変える動画" />
+            <p>1. 外形 のツールエリア＞ 大きさの設定 の右側にある <i class="fa-solid fa-caret-down"></i> /
+                <i class="fa-solid fa-caret-up"></i>
+                マークを押すと大きさの設定の表示/非表示を切り替えることができます。
+            <p>大きさの設定の・高さ、・幅を変えると外形がその大きさに拡大・縮小されます。また、厚さを変更するとその厚さで出力されるようになります。
+
+
+            <h2><span>02</span>基板の穴の設計</h2>
+            <p>ここに説明を記載。※編集中</p>
+        </div>
+    </div>
+
+    <script src="menu.js?date=2024-01-21"></script>
+</body>
+
+</html>

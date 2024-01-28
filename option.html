@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="stylesheet.css?date=2024-01-13-03">
+    <link rel="stylesheet" href="mediaScreen.css?date=2024-01-13-03">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+        });
+    </script>
+
+    <title>Cathird ver.β</title>
+    <link rel="icon" href="favicon.ico" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+
+    <script>
+        $(function () {
+            $("#head").load("head.html");
+        });
+    </script>
+
+
+    <script>
+        $('.lang-select').click(function () {
+            var lang = $(this).attr('data-lang');
+            window.location = $(this).attr('href');
+            location.reload();
+        });
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ja',
+                layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+            }, 'google_translate_element');
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <header id="header"> </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>設定</h1>
+            <h3>言語設定</h3>
+            <div class="text-center mb-3">
+                <a href="#googtrans(ja|en)" class="lang-select" data-lang="en"><img
+                        src="https://www.solodev.com/assets/google-translate/flag-usa.png" alt="USA"></a>
+                <a href="#googtrans(ja|zh-CN)" class="lang-select" data-lang="zh-CN"><img
+                        src="https://www.solodev.com/assets/google-translate/flag-china.png" alt="China"></a>
+                <a href="#googtrans(ja|es)" class="lang-select" data-lang="es"><img
+                        src="https://www.solodev.com/assets/google-translate/flag-mexico.png" alt="MEXICO"></a>
+                <a href="#googtrans(ja|fr)" class="lang-select" data-lang="fr"><img
+                        src="https://www.solodev.com/assets/google-translate/flag-france.png" alt="France"></a>
+                <a href="#googtrans(ja|ja)" class="lang-select" data-lang="ja"><img
+                        src="https://www.solodev.com/assets/google-translate/flag-japan.png" alt="JAPAN"></a>
+            </div>
+            <h3>回路部品設定</h3>
+
+        </div>
+    </div>
+
+    <script src="menu.js?date=2024-01-13-03"></script>
+</body>
+
+</html>

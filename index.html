@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="stylesheet.css?date=2024-01-21">
+    <link rel="stylesheet" href="mediaScreen.css?date=2024-01-21">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+        });
+
+        window.addEventListener("beforeunload", (event) => {
+            event.preventDefault();
+            event.returnValue = "";
+        });
+    </script>
+
+
+    <title>Cathird</title>
+    <meta name="description" content="Cathirdは3Dプリンタで印刷する回路基板をオンライン上で設計、制作することができる無料のCADソフトです。">
+    <link rel="icon" href="favicon.ico" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+
+    <script>
+        $(function () {
+            $("#head").load("head.html");
+        });
+    </script>
+
+
+
+
+
+</head>
+
+<body>
+    <header id="header"> </header>
+    <div class="parent">
+        <div class="child1">
+            <div class="tab">
+                <label>
+                    <input type="radio" name="tab" id="tab1" onclick="tabChange(this.id)" checked>
+                    1. 外形
+                </label>
+
+
+                <label>
+                    <input type="radio" name="tab" id="tab2" onclick="tabChange(this.id)">
+                    2. くり抜き
+                </label>
+
+
+                <label>
+                    <input type="radio" name="tab" id="tab3" onclick="tabChange(this.id)">
+                    3. 回路
+                </label>
+                <div class="wrapper">
+                    <canvas id="canvas0-area" class="canvas-area" onContextmenu="return false;"></canvas>
+                    <canvas id="canvas1-area" class="canvas-area" onContextmenu="return false;"></canvas>
+                    <canvas id="canvas2-area" class="canvas-area" onContextmenu="return false;"></canvas>
+                    <canvas id="canvas3-area" class="canvas-area" onContextmenu="return false;"></canvas>
+                    <button class="buttun_outPut" id="button_outPut" onclick="outPut()">
+                        <span>出力</span><i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="layer">
+                <img class="picture" id="pictureDraw">
+            </div>
+
+
+
+
+        </div>
+
+        <div class="child2">
+
+            <button class="buttun_back" id="button_back" onclick="back()"></button>
+            <button class="buttun_next" id="button_next" onclick="next()"></button>
+            <button class="buttun_trash" id="clear-button" onclick="allClear()"></button>
+
+            <div id="tab1tools">
+
+                <h3>移動</h3>
+                <input type="radio" name="tools" value="move1" id="move1" onclick="pushTools(this.id)" checked>
+                <label class="tools1" for="move1">
+                    <div id="toolImg">
+                        <img class="tools1" src="PicSource/ToolIcon/move.png" alt="move1" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>移動
+                    </div>
+                </label>
+
+                <h3>外形線</h3>
+
+                <input type="radio" name="tools" value="straight1" id="straight1" onclick="pushTools(this.id)">
+                <label class="tools1" for="straight1">
+                    <div id="toolImg">
+                        <img class="tools1" src="PicSource/ToolIcon/straight.png" alt="straight1" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>直線
+                    </div>
+                </label>
+
+                <input type="radio" name="tools" value="curve1" id="curve1" onclick="pushTools(this.id)">
+                <label class="tools1" for="curve1">
+                    <div id="toolImg">
+                        <img class="tools1" src="PicSource/ToolIcon/curve.png" alt="curve1" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>曲線
+                    </div>
+                </label>
+
+                <h3>画像</h3>
+                <input type="checkbox" name="tools" value="picture_display" id="picture_display"
+                    onclick="picture_display()" checked>
+                <label class="picture_display" for="picture_display">
+                </label>
+
+
+                <input type="file" name="tools" value="picture" id="picture" onclick="pushTools(this.id)"
+                    onchange="layerPicLoad(this)" ;>
+                <label class="tools1" for="picture">
+                    <div id="toolImg">
+                        <img class="tools1" src="PicSource/ToolIcon/picture.png" alt="picture" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>画像
+                    </div>
+                </label>
+
+
+                <h3>大きさの設定</h3>
+                <input type="checkbox" name="tools" value="detail_display" id="detail_display"
+                    onclick="detail_display('detail_menu1')" checked>
+                <label class="detail_display" for="detail_display"> </label>
+
+                <div id="detail_menu1">
+
+                    <label>
+                        <span class="sizeOption-label">・高さ(mm)</span>
+                        <input type="number" class="sizeOption" value="" id="sizeHeight"
+                            onchange="changeObjectSize(document.getElementById('sizeWidth').value,value)">
+                    </label>
+
+                    <label>
+                        <span class="sizeOption-label">・幅(mm)</span>
+                        <input type="number" class="sizeOption" value="" id="sizeWidth"
+                            onchange="changeObjectSize(value,document.getElementById('sizeHeight').value)">
+                    </label>
+                    <label>
+                        <span class="sizeOption-label">・厚さ(mm)</span>
+                        <input type="number" class="sizeOption" value="1.6" id="sizeThickness">
+                    </label>
+                </div>
+
+            </div>
+            <div id="tab2tools">
+                <h3>移動</h3>
+                <input type="radio" name="tools" value="move2" id="move2" onclick="pushTools(this.id)" checked>
+                <label class="tools2" for="move2">
+                    <div id="toolImg">
+                        <img class="tools2" src="PicSource/ToolIcon/move.png" alt="move" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>移動
+                    </div>
+                </label>
+
+                <h3>くり抜き</h3>
+                <input type="radio" name="tools" value="straight2" id="straight2" onclick="pushTools(this.id)">
+                <label class="tools2" for="straight2">
+                    <div id="toolImg">
+                        <img class="tools2" src="PicSource/ToolIcon/straight.png" alt="straight2" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>直線
+                    </div>
+                </label>
+
+                <input type="radio" name="tools" value="curve2" id="curve2" onclick="pushTools(this.id)">
+                <label class="tools2" for="curve2">
+                    <div id="toolImg">
+                        <img class="tools2" src="PicSource/ToolIcon/curve.png" alt="curve2" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>曲線
+                    </div>
+                </label>
+
+
+            </div>
+
+            <div id="tab3tools">
+                <h3>移動</h3>
+                <input type="radio" name="tools" value="move3" id="move3" onclick="pushTools(this.id)" checked>
+                <label class="tools3" for="move3">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/move.png" alt="move" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>移動
+                    </div>
+                </label>
+
+
+                <h3>導線</h3>
+                <input type="radio" name="tools" value="straight3" id="straight3" onclick="pushTools(this.id)">
+                <label class="tools3" for="straight3">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/straight.png" alt="straight3" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>直線
+                    </div>
+                </label>
+
+                <input type="radio" name="tools" value="curve3" id="curve3" onclick="pushTools(this.id)">
+                <label class="tools3" for="curve3">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/curve.png" alt="curve3" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>曲線
+                    </div>
+                </label>
+
+                <h3>部品</h3>
+                <input type="radio" name="tools" value="resistance" id="resistance" onclick="pushTools(this.id)">
+                <label class="tools3" for="resistance">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/resistance.png" alt="resistance" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>抵抗
+                    </div>
+                </label>
+
+                <input type="radio" name="tools" value="led" id="led" onclick="pushTools(this.id)">
+                <label class="tools3" for="led">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/led.png" alt="led" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>LED
+                    </div>
+                </label>
+                <input type="radio" name="tools" value="tactSwitch" id="tactSwitch" onclick="pushTools(this.id)">
+                <label class="tools3" for="tactSwitch">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/tactSwitch.png" alt="tactSwitch" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>タクトスイッチ
+                    </div>
+                </label>
+                <input type="radio" name="tools" value="slideSwitch" id="slideSwitch" onclick="pushTools(this.id)">
+                <label class="tools3" for="slideSwitch">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/slideSwitch.png" alt="slideSwitch" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>スライドスイッチ
+                    </div>
+                </label>
+                <input type="radio" name="tools" value="batteryBox" id="batteryBox" onclick="pushTools(this.id)">
+                <label class="tools3" for="batteryBox">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/batteryBox.png" alt="batteryBox" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>電池ボックス（市販）
+                    </div>
+                </label>
+                <input type="radio" name="tools" value="batteryBox2" id="batteryBox2" onclick="pushTools(this.id)">
+                <label class="tools3" for="batteryBox2">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/batteryBox2.png" alt="batteryBox2" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>電池ボックス（オリジナル）
+                    </div>
+                </label>
+                <input type="radio" name="tools" value="joint" id="joint" onclick="pushTools(this.id)">
+                <label class="tools3" for="joint">
+                    <div id="toolImg">
+                        <img class="tools3" src="PicSource/ToolIcon/joint.png" alt="joint" />
+                    </div>
+                    <div id="toolLabel">
+                        <p>接合部
+                    </div>
+                </label>
+
+
+            </div>
+
+
+
+
+            <script src="main.js?date=2024-01-21"></script>
+            <script src="OutPutSCAD.js?date=2024-01-21"></script>
+            <script src="menu.js?date=2024-01-21"></script>
+</body>
+
+</html>

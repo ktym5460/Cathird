@@ -1,0 +1,14 @@
+@media screen and (max-width: 640px) {
+    .menu-text {
+        display: none;
+        /* テキスト部分を非表示にする */
+    }
+
+
+    /* ブログ型ページ用のCSS */
+    .container {
+        padding: 0;
+        /* スマートフォン用に余白を削除 */
+    }
+
+}
